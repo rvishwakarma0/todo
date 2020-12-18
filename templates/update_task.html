@@ -1,0 +1,65 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+<div class="container newtask">
+    <form method="post" enctype="multipart/form-data" action="#">
+        {% csrf_token %}
+        <br>
+        <div class="form-group row">
+            <label for="title" class="col-sm-2 col-form-label col-form-label-lg">Title</label>
+            <div class="col-sm-5">
+               <input class="form-control-lg" type="text" placeholder="{{task.getTitle}}" readonly>
+            </div>
+            <div class="col-sm-5">
+                <input type="text" class="form-control form-control-lg" id="title" name="title" value="" placeholder="write new* task title here. . .">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="description" class="col-sm-2 col-form-label">Description</label>
+            <div class="col-sm-5">
+               <textarea class="form-control" id="description" name="description" rows="3" placeholder="{{task.getDescription}}" readonly></textarea>
+            </div>
+            <div class="col-sm-5">
+                <textarea class="form-control" id="description" name="description" rows="3" value="" placeholder="write new* task description here . . ."></textarea>
+            </div>
+            
+        </div>
+        <div class="form-group row">
+            <h4 class="col-sm-2 col-form-label">Completed ?</h4>
+            <div class="col-sm-5">
+               {% if task.completed == True %}
+               <input class="form-control" type="text" placeholder="Marked Yes . . ." readonly>
+               {% else %}
+               <input class="form-control" type="text" placeholder="Marked No . . ." readonly>
+               {% endif %}
+            </div>
+            <div class="col-sm-5">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="completed" id="completed-false" value="False">
+                  <label class="form-check-label" for="completed-false">No</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="completed" id="completed-true" value="True">
+                  <label class="form-check-label" for="completed-true">yes</label>
+                </div>       
+            </div>  
+        </div>
+        <div class="form-group row">
+            <div class="col-7">
+               <img src="{{task.imageURL}}" class="img-thumbnail" alt="">
+            </div>
+            <div class="col-5">
+               <input type="file" name="task_image" class="form-control-file border">
+            </div>
+        </div>
+         
+        
+            <div class="form-group form-inline">
+                <a class="btn btn-info form-control btn-lg" style= "margin: 5px 5px 5px 5px" href="{% url 'tasks' %}" role="button">Back to Tasks</a>
+                <button class="btn btn-dark form-control btn-lg" style= "margin: 5px 5px 5px 5px" type="submit">update it!</button>
+            </div>  
+    </form>
+
+</div>
+
+{% endblock content %}

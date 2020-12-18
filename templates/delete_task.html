@@ -1,0 +1,61 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+            <div class="col-4">
+         
+                  {% if task.completed == False %}
+                  <div class="card cfcard">
+                     <div class="card-body text-left">
+                        <h4 class="card-title">{{task.getTitle}}</h4><hr>
+                        <blockquote class="blockquote">
+                           <p class="card-text">{{task.getDescription}}</p><hr>
+                           <footer class="blockquote-footer">created on:{{task.create_date_time}}<br></footer>
+                           <footer class="blockquote-footer font-weight-bold">updated on:{{task.update_date_time}}</footer><hr>
+                        </blockquote>
+                        {% if task.imageURL != '' %}
+                        <a href="{{task.imageURL}}" class="btn btn-dark">view photo</a>
+                        {% endif %}
+                        <div class="row">
+                           <div class="col-6">
+                              <a href="{% url 'tasks' %}" class="btn btn-info">back to tasks</a>
+                           </div>
+                           <div class="col-6">
+                              <form method="post">
+                                 {% csrf_token %}
+                                 <button type="submit" class="btn btn-danger">confirm delete</button>
+                                 </form>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  {% else %}
+                  <div class="card ccard">
+                     <div class="card-body text-left">
+                        <h4 class="card-title">{{task.getTitle}}</h4><hr>
+                        <blockquote class="blockquote">
+                           <p class="card-text">{{task.getDescription}}</p><hr>
+                           <footer class="blockquote-footer">created on:{{task.create_date_time}}<br></footer>
+                           <footer class="blockquote-footer font-weight-bold">updated on:{{task.update_date_time}}</footer><hr>
+                        </blockquote>
+                        {% if task.imageURL != '' %}
+                        <a href="{{task.imageURL}}" class="btn btn-dark">view photo</a>
+                        {% endif %}
+                        <div class="row">
+                           <div class="col-6">
+                              <a href="{% url 'tasks' %}" class="btn btn-info">back to tasks</a>
+                           </div>
+                           <div class="col-6">
+                              <form method="post">
+                                 {% csrf_token %}
+                                 <button type="submit" class="btn btn-danger">confirm delete</button>
+                                 </form>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  {% endif %}      
+                  
+            </div>  
+
+{% endblock content %}

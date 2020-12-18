@@ -1,0 +1,58 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+   {% if user.is_authenticated %}
+   <div class="container">
+      
+
+   <div class="row">
+   {% for task in tasks %}
+
+      
+            <div class="col-4">
+         
+                  {% if task.completed == False %}
+                  <div class="card cfcard">
+                     <div class="card-body text-left">
+                        <h4 class="card-title">{{task.getTitle}}</h4><hr>
+                        <blockquote class="blockquote">
+                           <p class="card-text">{{task.getDescription}}</p><hr>
+                           <footer class="blockquote-footer">created on:{{task.create_date_time}}<br></footer>
+                           <footer class="blockquote-footer font-weight-bold">updated on:{{task.update_date_time}}</footer><hr>
+                        </blockquote>
+                        {% if task.imageURL != '' %}
+                        <a href="{{task.imageURL}}" class="btn btn-dark">view photo</a>
+                        {% endif %}
+                        <a href="update_task/{{task.id}}/" class="btn btn-info">update</a>
+                        <a href="delete_task/{{task.id}}/" class="btn btn-danger">delete</a>
+                        
+                     </div>
+                  </div>
+                  {% else %}
+                  <div class="card ccard">
+                     <div class="card-body text-left">
+                        <h4 class="card-title">{{task.getTitle}}</h4><hr>
+                        <blockquote class="blockquote">
+                           <p class="card-text">{{task.getDescription}}</p><hr>
+                           <footer class="blockquote-footer">created on:{{task.create_date_time}}<br></footer>
+                           <footer class="blockquote-footer font-weight-bold">updated on:{{task.update_date_time}}</footer><hr>
+                        </blockquote>
+                        {% if task.imageURL != '' %}
+                        <a href="{{task.imageURL}}" class="btn btn-dark">view photo</a>
+                        {% endif %}
+                        <a href="update_task/{{task.id}}/" class="btn btn-info">update</a>
+                        <a href="delete_task/{{task.id}}/" class="btn btn-danger">delete</a>
+                     </div>
+                  </div>
+                  {% endif %}      
+                  
+            </div>  
+   {% endfor %}
+   </div>  
+      </div>   
+   {% else %}
+   <div class= "container text-center newtask">
+      <h1><kbd>pLEASE rEGISTER or LOgiN</kbd></h1>
+   </div>
+   {% endif %}
+{% endblock content %}
